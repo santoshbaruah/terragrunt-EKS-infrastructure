@@ -290,6 +290,8 @@ The CI/CD pipeline follows a structured approach to infrastructure deployment:
    - Manual triggers for specific environments
    - Scheduled runs for drift detection
 
+For detailed instructions on setting up GitHub Actions and configuring the required secrets, see our [GitHub Actions Setup Guide](docs/github-actions-setup.md).
+
 ## 📊 Observability Stack
 
 The infrastructure includes a comprehensive observability stack for monitoring, logging, and alerting:
