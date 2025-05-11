@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="400" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- EKS Cluster -->
+  <circle cx="300" cy="100" r="50" fill="#326ce5" opacity="0.7"/>
+  <text x="300" y="95" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">EKS Control</text>
+  <text x="300" y="115" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">Plane</text>
+  <text x="300" y="135" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">v1.32</text>
+  
+  <!-- Node Groups -->
+  <rect x="50" y="200" width="150" height="100" fill="#326ce5" rx="10" ry="10" opacity="0.2" stroke="#326ce5" stroke-width="2"/>
+  <text x="125" y="220" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#326ce5" text-anchor="middle">Node Group 1</text>
+  
+  <rect x="225" y="200" width="150" height="100" fill="#326ce5" rx="10" ry="10" opacity="0.2" stroke="#326ce5" stroke-width="2"/>
+  <text x="300" y="220" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#326ce5" text-anchor="middle">Node Group 2</text>
+  
+  <rect x="400" y="200" width="150" height="100" fill="#326ce5" rx="10" ry="10" opacity="0.2" stroke="#326ce5" stroke-width="2"/>
+  <text x="475" y="220" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#326ce5" text-anchor="middle">Node Group 3</text>
+  
+  <!-- Worker Nodes -->
+  <rect x="70" y="240" width="40" height="40" fill="#326ce5" rx="5" ry="5" opacity="0.5"/>
+  <text x="90" y="262" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Node</text>
+  
+  <rect x="140" y="240" width="40" height="40" fill="#326ce5" rx="5" ry="5" opacity="0.5"/>
+  <text x="160" y="262" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Node</text>
+  
+  <rect x="245" y="240" width="40" height="40" fill="#326ce5" rx="5" ry="5" opacity="0.5"/>
+  <text x="265" y="262" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Node</text>
+  
+  <rect x="315" y="240" width="40" height="40" fill="#326ce5" rx="5" ry="5" opacity="0.5"/>
+  <text x="335" y="262" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Node</text>
+  
+  <rect x="420" y="240" width="40" height="40" fill="#326ce5" rx="5" ry="5" opacity="0.5"/>
+  <text x="440" y="262" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Node</text>
+  
+  <rect x="490" y="240" width="40" height="40" fill="#326ce5" rx="5" ry="5" opacity="0.5"/>
+  <text x="510" y="262" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Node</text>
+  
+  <!-- Connections -->
+  <line x1="300" y1="150" x2="125" y2="200" stroke="#326ce5" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="300" y1="150" x2="300" y2="200" stroke="#326ce5" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="300" y1="150" x2="475" y2="200" stroke="#326ce5" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- IAM Roles -->
+  <rect x="100" y="330" width="120" height="40" fill="#ff9900" rx="5" ry="5" opacity="0.7"/>
+  <text x="160" y="355" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Cluster IAM Role</text>
+  
+  <rect x="380" y="330" width="120" height="40" fill="#ff9900" rx="5" ry="5" opacity="0.7"/>
+  <text x="440" y="355" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Node IAM Role</text>
+  
+  <!-- Connections to IAM -->
+  <line x1="300" y1="150" x2="160" y2="330" stroke="#ff9900" stroke-width="1" stroke-dasharray="5,5"/>
+  <line x1="300" y1="250" x2="440" y2="330" stroke="#ff9900" stroke-width="1" stroke-dasharray="5,5"/>
+  
+  <!-- Autoscaling -->
+  <rect x="240" y="330" width="120" height="40" fill="#5eead4" rx="5" ry="5" opacity="0.7"/>
+  <text x="300" y="355" font-family="Arial, sans-serif" font-size="12" fill="#232f3e" text-anchor="middle">Auto Scaling</text>
+  
+  <!-- Connection to Autoscaling -->
+  <line x1="300" y1="300" x2="300" y2="330" stroke="#5eead4" stroke-width="1" stroke-dasharray="5,5"/>
+  
+  <!-- Title -->
+  <text x="300" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#326ce5" text-anchor="middle">EKS Cluster Architecture</text>
+  
+  <!-- Kubernetes Logo -->
+  <g transform="translate(300, 60) scale(0.2)">
+    <circle cx="0" cy="0" r="50" fill="white"/>
+    <path d="M0,-30 L30,15 L-30,15 Z" fill="#326ce5"/>
+  </g>
+</svg>
