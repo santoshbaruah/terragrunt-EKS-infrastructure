@@ -112,8 +112,8 @@ The infrastructure follows AWS best practices and is built with a multi-tier arc
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/santoshbaruah/Terragrunt-EKS-infrastructure-auto.git
-cd Terragrunt-EKS-infrastructure-auto
+git clone https://github.com/santoshbaruah/terragrunt-EKS-infrastructure.git
+cd terragrunt-EKS-infrastructure
 ```
 
 2. Configure AWS credentials:
@@ -404,8 +404,8 @@ This infrastructure is designed for continuous development and testing with buil
    brew install terraform terragrunt kubectl aws-cli
 
    # Clone repository
-   git clone https://github.com/santoshbaruah/Terragrunt-EKS-infrastructure-auto.git
-   cd Terragrunt-EKS-infrastructure-auto
+   git clone https://github.com/santoshbaruah/terragrunt-EKS-infrastructure.git
+   cd terragrunt-EKS-infrastructure
    ```
 
 2. **Infrastructure Development**:
