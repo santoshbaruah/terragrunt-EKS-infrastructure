@@ -102,8 +102,8 @@ Each environment (dev, staging, prod) has its own configuration with appropriate
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/yourusername/terragrunt-kubernetes.git
-cd terragrunt-kubernetes
+git clone https://github.com/santoshbaruah/terragrunt-EKS-infrastructure.git
+cd terragrunt-EKS-infrastructure
 ```
 
 2. Configure AWS credentials:
