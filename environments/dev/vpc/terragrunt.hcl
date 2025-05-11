@@ -1,8 +1,13 @@
 # Dev environment VPC terragrunt.hcl
 
-# Include the environment-specific terragrunt.hcl file
+# Include the root terragrunt.hcl file directly
 include {
-  path = "../terragrunt.hcl"
+  path = find_in_parent_folders()
+}
+
+# Import environment-specific variables
+locals {
+  env_vars = read_terragrunt_config(find_in_parent_folders("terragrunt.hcl"))
 }
 
 # Terraform source
