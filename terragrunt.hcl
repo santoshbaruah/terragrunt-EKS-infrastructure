@@ -3,10 +3,13 @@
 
 locals {
   # Parse the file path to extract the environment
-  # Use a more flexible regex pattern that works with the current directory structure
+  # Use a more robust regex pattern that works in both local and CI environments
   env = try(
-    regex("environments/([^/]+)", get_original_terragrunt_dir())[0],
-    "unknown"
+    regex(".*/environments/([^/]+).*", get_original_terragrunt_dir())[0],
+    try(
+      regex("environments/([^/]+).*", get_original_terragrunt_dir())[0],
+      "unknown"
+    )
   )
 
   # Common tags for all resources

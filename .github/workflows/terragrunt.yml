@@ -35,12 +35,15 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
 
       - name: Setup Terragrunt
         run: |
           wget -q https://github.com/gruntwork-io/terragrunt/releases/download/v${{ env.TG_VERSION }}/terragrunt_linux_amd64
           chmod +x terragrunt_linux_amd64
           sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
+          # Verify installation
+          terragrunt --version
 
       - name: Terragrunt Format Check
         run: |
@@ -48,6 +51,9 @@ jobs:
 
       - name: Terragrunt Validate
         run: |
+          # Set TF_IN_AUTOMATION to suppress Terraform version warnings
+          export TF_IN_AUTOMATION=true
+          # Run validation on each directory containing .hcl files
           find environments -type d -name "*.terraform" -prune -o -type f -name "*.hcl" -exec dirname {} \; | sort -u | xargs -I{} sh -c 'cd {} && terragrunt validate || exit 1'
 
   plan:
@@ -65,6 +71,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
 
       - name: Setup Terragrunt
         run: |
@@ -81,6 +88,8 @@ jobs:
 
       - name: Terragrunt Plan
         run: |
+          # Set TF_IN_AUTOMATION to suppress Terraform version warnings
+          export TF_IN_AUTOMATION=true
           cd environments/${{ matrix.environment }}
           terragrunt run-all plan --terragrunt-non-interactive
 
@@ -99,6 +108,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
 
       - name: Setup Terragrunt
         run: |
@@ -115,6 +125,8 @@ jobs:
 
       - name: Terragrunt Apply
         run: |
+          # Set TF_IN_AUTOMATION to suppress Terraform version warnings
+          export TF_IN_AUTOMATION=true
           cd environments/${{ github.event.inputs.environment }}
           terragrunt run-all apply --terragrunt-non-interactive
 
@@ -132,6 +144,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
 
       - name: Setup Terragrunt
         run: |
@@ -148,5 +161,7 @@ jobs:
 
       - name: Terragrunt Destroy
         run: |
+          # Set TF_IN_AUTOMATION to suppress Terraform version warnings
+          export TF_IN_AUTOMATION=true
           cd environments/${{ github.event.inputs.environment }}
           terragrunt run-all destroy --terragrunt-non-interactive
