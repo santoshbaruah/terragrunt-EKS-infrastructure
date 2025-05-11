@@ -1,14 +1,14 @@
 # Staging environment Kubernetes application terragrunt.hcl
 
-# Include the environment terragrunt.hcl file
+# Include the environment-specific terragrunt.hcl file
 include {
-  path = find_in_parent_folders()
+  path = "../terragrunt.hcl"
 }
 
 # Define dependencies
 dependency "kubernetes_cluster" {
   config_path = "../kubernetes-cluster"
-  
+
   # Mock outputs for plan operations
   mock_outputs = {
     cluster_name = "eks-staging"
@@ -17,7 +17,7 @@ dependency "kubernetes_cluster" {
 
 dependency "kubernetes_namespace" {
   config_path = "../kubernetes-namespace"
-  
+
   # Mock outputs for plan operations
   mock_outputs = {
     name = "sample-app"
@@ -33,14 +33,14 @@ terraform {
 inputs = {
   app_name  = "sample-app"
   namespace = dependency.kubernetes_namespace.outputs.name
-  
+
   labels = {
     environment = "staging"
     managed-by  = "terragrunt"
   }
-  
+
   replicas = 3
-  
+
   containers = [
     {
       name  = "sample-app"
@@ -74,7 +74,7 @@ inputs = {
       }
     }
   ]
-  
+
   create_service = true
   service_type   = "ClusterIP"
   service_ports  = [
@@ -84,7 +84,7 @@ inputs = {
       target_port = 80
     }
   ]
-  
+
   create_ingress = true
   ingress_annotations = {
     "kubernetes.io/ingress.class"                    = "nginx"

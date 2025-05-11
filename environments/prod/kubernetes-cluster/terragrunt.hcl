@@ -1,8 +1,8 @@
 # Production environment Kubernetes cluster terragrunt.hcl
 
-# Include the environment terragrunt.hcl file
+# Include the environment-specific terragrunt.hcl file
 include {
-  path = find_in_parent_folders()
+  path = "../terragrunt.hcl"
 }
 
 # Define dependencies

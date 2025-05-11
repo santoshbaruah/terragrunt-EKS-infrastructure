@@ -3,16 +3,19 @@
 
 locals {
   # Parse the file path to extract the environment
-  parsed_path = regex(".*/environments/(?P<env>[^/]+)/.*", get_original_terragrunt_dir())
-  env         = try(local.parsed_path.env, "")
-  
+  # Use a more flexible regex pattern that works with the current directory structure
+  env = try(
+    regex("environments/([^/]+)", get_original_terragrunt_dir())[0],
+    "unknown"
+  )
+
   # Common tags for all resources
   common_tags = {
     Environment = local.env
     ManagedBy   = "Terragrunt"
     Project     = "KubernetesInfrastructure"
   }
-  
+
   # AWS region - can be overridden in child terragrunt.hcl files
   aws_region = "us-west-2"
 }
@@ -24,7 +27,7 @@ generate "provider" {
   contents  = <<EOF
 provider "aws" {
   region = "${local.aws_region}"
-  
+
   default_tags {
     tags = ${jsonencode(local.common_tags)}
   }

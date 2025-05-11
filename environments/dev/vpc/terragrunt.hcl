@@ -1,8 +1,8 @@
 # Dev environment VPC terragrunt.hcl
 
-# Include the environment terragrunt.hcl file
+# Include the environment-specific terragrunt.hcl file
 include {
-  path = find_in_parent_folders()
+  path = "../terragrunt.hcl"
 }
 
 # Terraform source
@@ -18,7 +18,7 @@ inputs = {
   private_subnet_cidrs = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
   availability_zones   = ["us-west-2a", "us-west-2b", "us-west-2c"]
   cluster_name         = "eks-dev"
-  
+
   # Tags
   tags = {
     Environment = "dev"

@@ -1,8 +1,8 @@
 # Staging environment VPC terragrunt.hcl
 
-# Include the environment terragrunt.hcl file
+# Include the environment-specific terragrunt.hcl file
 include {
-  path = find_in_parent_folders()
+  path = "../terragrunt.hcl"
 }
 
 # Terraform source
@@ -18,7 +18,7 @@ inputs = {
   private_subnet_cidrs = ["10.1.4.0/24", "10.1.5.0/24", "10.1.6.0/24"]
   availability_zones   = ["us-west-2a", "us-west-2b", "us-west-2c"]
   cluster_name         = "eks-staging"
-  
+
   # Tags
   tags = {
     Environment = "staging"
