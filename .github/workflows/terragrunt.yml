@@ -52,6 +52,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Verify AWS credentials
+        run: |
+          echo "Verifying AWS credentials..."
+          aws sts get-caller-identity || {
+            echo "::error::AWS credentials verification failed. Please check that AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
+            echo "::error::You can set these secrets by going to Settings > Secrets and variables > Actions in your GitHub repository."
+            exit 1
+          }
+
       - name: Terragrunt Format Check
         run: |
           terragrunt hclfmt --check
@@ -93,6 +102,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Verify AWS credentials
+        run: |
+          echo "Verifying AWS credentials..."
+          aws sts get-caller-identity || {
+            echo "::error::AWS credentials verification failed. Please check that AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
+            echo "::error::You can set these secrets by going to Settings > Secrets and variables > Actions in your GitHub repository."
+            exit 1
+          }
+
       - name: Terragrunt Plan
         run: |
           # Set TF_IN_AUTOMATION to suppress Terraform version warnings
@@ -130,6 +148,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Verify AWS credentials
+        run: |
+          echo "Verifying AWS credentials..."
+          aws sts get-caller-identity || {
+            echo "::error::AWS credentials verification failed. Please check that AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
+            echo "::error::You can set these secrets by going to Settings > Secrets and variables > Actions in your GitHub repository."
+            exit 1
+          }
+
       - name: Terragrunt Apply
         run: |
           # Set TF_IN_AUTOMATION to suppress Terraform version warnings
@@ -165,6 +192,15 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS credentials
+        run: |
+          echo "Verifying AWS credentials..."
+          aws sts get-caller-identity || {
+            echo "::error::AWS credentials verification failed. Please check that AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
+            echo "::error::You can set these secrets by going to Settings > Secrets and variables > Actions in your GitHub repository."
+            exit 1
+          }
 
       - name: Terragrunt Destroy
         run: |
