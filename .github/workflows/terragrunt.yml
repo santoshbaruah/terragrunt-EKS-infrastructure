@@ -1,5 +1,20 @@
 name: Terragrunt CI/CD
 
+# AWS Authentication Options:
+# 1. IAM User (Long-lived credentials):
+#    - Create an IAM user with appropriate permissions
+#    - Generate access keys and add them as GitHub repository secrets:
+#      - AWS_ACCESS_KEY_ID
+#      - AWS_SECRET_ACCESS_KEY
+#
+# 2. OIDC (Recommended for production):
+#    - Set up OIDC between GitHub and AWS:
+#      https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+#    - Create an IAM role with appropriate permissions and trust policy for GitHub Actions
+#    - Add the role ARN as a GitHub repository secret:
+#      - AWS_ROLE_TO_ASSUME
+#    - Uncomment the OIDC configuration in the "Configure AWS credentials" steps
+
 on:
   push:
     branches:
@@ -48,16 +63,28 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
+          # Option 1: Using AWS IAM User credentials (stored as GitHub secrets)
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+          # Uncomment the following lines to use OIDC instead of long-lived credentials
+          # Option 2: Using OIDC (more secure, recommended for production)
+          # role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          # role-session-name: GitHubActions-${{ github.run_id }}
+          # aws-region: ${{ env.AWS_REGION }}
 
       - name: Verify AWS credentials
         run: |
           echo "Verifying AWS credentials..."
           aws sts get-caller-identity || {
-            echo "::error::AWS credentials verification failed. Please check that AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
-            echo "::error::You can set these secrets by going to Settings > Secrets and variables > Actions in your GitHub repository."
+            echo "::error::AWS credentials verification failed. Please check the following:"
+            echo "::error::1. Ensure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
+            echo "::error::   - Go to Settings > Secrets and variables > Actions in your GitHub repository"
+            echo "::error::   - Add these secrets with values from your AWS IAM user with appropriate permissions"
+            echo "::error::2. Verify the IAM user has the necessary permissions for Terraform/Terragrunt operations"
+            echo "::error::3. Check that the AWS region specified in the workflow is correct"
+            echo "::error::4. For enhanced security, consider using OIDC authentication instead of long-lived credentials"
+            echo "::error::   - See: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services"
             exit 1
           }
 
@@ -98,16 +125,28 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
+          # Option 1: Using AWS IAM User credentials (stored as GitHub secrets)
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+          # Uncomment the following lines to use OIDC instead of long-lived credentials
+          # Option 2: Using OIDC (more secure, recommended for production)
+          # role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          # role-session-name: GitHubActions-${{ github.run_id }}
+          # aws-region: ${{ env.AWS_REGION }}
 
       - name: Verify AWS credentials
         run: |
           echo "Verifying AWS credentials..."
           aws sts get-caller-identity || {
-            echo "::error::AWS credentials verification failed. Please check that AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
-            echo "::error::You can set these secrets by going to Settings > Secrets and variables > Actions in your GitHub repository."
+            echo "::error::AWS credentials verification failed. Please check the following:"
+            echo "::error::1. Ensure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
+            echo "::error::   - Go to Settings > Secrets and variables > Actions in your GitHub repository"
+            echo "::error::   - Add these secrets with values from your AWS IAM user with appropriate permissions"
+            echo "::error::2. Verify the IAM user has the necessary permissions for Terraform/Terragrunt operations"
+            echo "::error::3. Check that the AWS region specified in the workflow is correct"
+            echo "::error::4. For enhanced security, consider using OIDC authentication instead of long-lived credentials"
+            echo "::error::   - See: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services"
             exit 1
           }
 
@@ -144,16 +183,28 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
+          # Option 1: Using AWS IAM User credentials (stored as GitHub secrets)
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+          # Uncomment the following lines to use OIDC instead of long-lived credentials
+          # Option 2: Using OIDC (more secure, recommended for production)
+          # role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          # role-session-name: GitHubActions-${{ github.run_id }}
+          # aws-region: ${{ env.AWS_REGION }}
 
       - name: Verify AWS credentials
         run: |
           echo "Verifying AWS credentials..."
           aws sts get-caller-identity || {
-            echo "::error::AWS credentials verification failed. Please check that AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
-            echo "::error::You can set these secrets by going to Settings > Secrets and variables > Actions in your GitHub repository."
+            echo "::error::AWS credentials verification failed. Please check the following:"
+            echo "::error::1. Ensure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
+            echo "::error::   - Go to Settings > Secrets and variables > Actions in your GitHub repository"
+            echo "::error::   - Add these secrets with values from your AWS IAM user with appropriate permissions"
+            echo "::error::2. Verify the IAM user has the necessary permissions for Terraform/Terragrunt operations"
+            echo "::error::3. Check that the AWS region specified in the workflow is correct"
+            echo "::error::4. For enhanced security, consider using OIDC authentication instead of long-lived credentials"
+            echo "::error::   - See: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services"
             exit 1
           }
 
@@ -189,16 +240,28 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
+          # Option 1: Using AWS IAM User credentials (stored as GitHub secrets)
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+          # Uncomment the following lines to use OIDC instead of long-lived credentials
+          # Option 2: Using OIDC (more secure, recommended for production)
+          # role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          # role-session-name: GitHubActions-${{ github.run_id }}
+          # aws-region: ${{ env.AWS_REGION }}
 
       - name: Verify AWS credentials
         run: |
           echo "Verifying AWS credentials..."
           aws sts get-caller-identity || {
-            echo "::error::AWS credentials verification failed. Please check that AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
-            echo "::error::You can set these secrets by going to Settings > Secrets and variables > Actions in your GitHub repository."
+            echo "::error::AWS credentials verification failed. Please check the following:"
+            echo "::error::1. Ensure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY secrets are correctly set in your GitHub repository."
+            echo "::error::   - Go to Settings > Secrets and variables > Actions in your GitHub repository"
+            echo "::error::   - Add these secrets with values from your AWS IAM user with appropriate permissions"
+            echo "::error::2. Verify the IAM user has the necessary permissions for Terraform/Terragrunt operations"
+            echo "::error::3. Check that the AWS region specified in the workflow is correct"
+            echo "::error::4. For enhanced security, consider using OIDC authentication instead of long-lived credentials"
+            echo "::error::   - See: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services"
             exit 1
           }
 
